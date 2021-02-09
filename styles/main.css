@@ -3,21 +3,35 @@
     margin: 0;
 }
 
+.main-container {
+    background-color: rgb(231, 208, 157);
+}
+
 .title {
-    margin-top: 20px;
-    margin: 20px;
+    height: 70px;
+    color: #fdf1d6;
+    background-color: #3f0f0c;
+    padding-top: 20px;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr, 1fr;
-    margin-left: 20px;
+    grid-template-columns: 30% 70%;
+    grid-template-areas: 'aside main';
+}
+
+.form {
+    padding-top: 50px;
 }
 
 .search-input {
     margin-left: 20px;
     border: none;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #3f0f0c;
+    cursor: pointer;
 }
 
 .search-button {
@@ -29,17 +43,20 @@
 }
 
 .series-fav-title {
-    grid-column-start: 1;
-    grid-column-end: 2;
     margin-top: 40px;
-    width: 30vw;
+    margin-left: 20px;
+    font-family: 'Roboto Mono', monospace;
+    color: #91091e;
+}
+
+.series-fav-container {
+    grid-area: aside;
+    border-right: 1px solid #3f0f0c;
 }
 
 .series-container {
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-area: main;
     margin-top: 20px;
-    width: 70vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -55,6 +72,22 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.seriefav-card {
+    list-style: none;
+    margin: 10px;
+    height: 150px;
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.serie-name {
+    font-family: 'Roboto Mono', monospace;
 }
 
 .img {

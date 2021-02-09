@@ -11,6 +11,7 @@ function getDataFromApi(searchValue) {
             series = data;
             renderSeries()
         })
+    setFavs();
 };
 
 //Search
@@ -24,6 +25,7 @@ function handleSubmit(ev) {
 
 function handleSearch() {
     getDataFromApi(inputElement.value);
+    setFavs();
 }
 formElement.addEventListener('submit', handleSubmit);
 button.addEventListener('click', handleSearch);
@@ -59,8 +61,10 @@ function renderSeries() {
         serieItem.addEventListener('click', handleSerie);
 
     }
+    setFavs();
 }
 
+//Definir paletas favoritas
 function isFav(serie) {
     const favFound = favs.find((fav) => {
         return fav.show.id === serie.show.id;
@@ -94,8 +98,61 @@ function handleSerie(ev) {
         favs.splice(favsFoundIndex, 1);
     }
     setFavs();
+    renderSeries();
 };
 
+
+//Array favs
+function handleFavorite(ev) {
+    const serieClickedId = parseInt(ev.currentTarget.id);
+    console.log(serieClickedId);
+
+    const indexFav = favorites.findIndex((serie) => {
+        return serie.id === serieClickedId;
+    });
+    if (indexFav !== -1) {
+        favs.splice(indexFav, 1);
+    } else {
+        for (let i = 0; i < serie.length; i++) {
+            if (serieClickedId === serie[i].id) {
+                favs.push(serie[i]);
+            }
+        }
+    }
+    renderFavSeries();
+}
+
+//Mis favs 
+function renderFavSeries() {
+    let htmlCode = '';
+
+    for (const serieFav of seriesFav) {
+
+        let serieFavImage = '';
+        if (serieFav.show.image === null) {
+            serieFavImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        } else {
+            serieFavImage = serieFav.show.image.medium;
+        };
+
+        htmlCode += `<li class="seriefav-card normal seriefav-card-js" id="${serieFav.show.id}">`;
+        htmlCode += `<img class="img" src="${serieFavImage}" class="serie-img">`;
+        htmlCode += `<p class="serie-name">${serieFav.show.name}</p>`;
+        htmlCode += ` </li>`;
+    }
+}
+const seriesFavContainer = document.querySelector('.container-fav-js');
+
+seriesFavContainer.innerHTML = htmlCode;
+
+//Listen favs
+//ESCUCHAR EVENTOS FAVORITAS
+function listenMovieEvents() {
+    const movieElements = document.querySelectorAll(".js-item");
+    for (const movieElement of movieElements) {
+        movieElement.addEventListener("click", handleMovie);
+    }
+}
 
 
 //Local Storage
@@ -103,3 +160,5 @@ function setFavs() {
     const stringyFavs = JSON.stringify(favs);
     localStorage.setItem('favs', stringyFavs);
 };
+
+renderFavSeries();
