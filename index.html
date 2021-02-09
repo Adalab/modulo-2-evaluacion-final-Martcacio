@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body>
     <h1 class="title">Buscador de series</h1>
-    <form>
-        <input placeholder="Busca tu serie" class="search-input" id="search" type="text" name="search" />
-        <button class="search-button-js">Search</button>
+    <form class="form-js">
+        <input placeholder="Busca tu serie" class="search-input search-input-js" id="search" type="text" name="search" />
+        <button class="search-button search-button-js"><i class="fas fa-search"></i> Search</button>
     </form>
     <main class="container">
-        <div class="series-fav-container">Mis series favoritas</div>
+        <div>
+            <h3 class="series-fav-title">Mis series favoritas</h3>
+            <ul class="series-fav-container containerfav-js">
+            </ul>
+        </div>
         <ul class="series-container container-js">
-            <!--
-            <div class="serie-card">
-                <img class="img" src="./images/belen-cuesta-paquita-salas-evidentemente-1563440305.jpg" class="serie-img-js">
-                <h3 class="serie-name-js">Nombre de la serie</h3>
-            </div>-->
         </ul>
     </main>
 

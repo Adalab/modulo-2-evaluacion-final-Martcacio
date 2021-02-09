@@ -1,71 +1,105 @@
 'use strict'
 
-const nameElement = document.querySelector('.serie-name-js');
-const imgElement = document.querySelector('.serie-img-js');
-const button = document.querySelector('.search-button-js');
-const seriesContainer = document.querySelector('.container-js');
-
-
 let series = [];
-let fav = [];
-
-
+let favs = [];
 
 //Datos del Api
-function getDataFromApi() {
-    fetch(`http://api.tvmaze.com/search/shows?q=girls`)
+function getDataFromApi(searchValue) {
+    fetch(`http://api.tvmaze.com/search/shows?q=` + searchValue)
         .then((response) => response.json())
         .then((data) => {
-            for (const show of data) {
-                console.log(show.show.name);
-                console.log(show.show.image);
-            }
-
+            series = data;
+            renderSeries()
         })
 };
 
+//Search
+const button = document.querySelector('.search-button-js');
+const inputElement = document.querySelector('.search-input-js');
+const formElement = document.querySelector('.form-js');
 
-button.addEventListener('click', getDataFromApi());
-
-
-
-//Carátulas de las series
-function paintImgSerie() {
-    if (serieCard.show.image === null) {
-        seriesObject.image = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
-    } else {
-        seriesObject.image = serieCard.show.image.medium;
-    }
+function handleSubmit(ev) {
+    ev.preventDefault();
 }
-paintImgSerie();
 
-
+function handleSearch() {
+    getDataFromApi(inputElement.value);
+}
+formElement.addEventListener('submit', handleSubmit);
+button.addEventListener('click', handleSearch);
 
 //Render
 function renderSeries() {
     let htmlCode = '';
 
     for (const serie of series) {
-        htmlCode += `<li class="serie-card">`;
-        htmlCode += `<img class="img" src="${show.show.image}" class="serie-img-js">`;
-        htmlCode += `<h3 class="serie-name-js">${show.show.name}</h3>`;
-        htmlCode += ` < /li>`;
+
+        let serieImage = '';
+        if (serie.show.image === null) {
+            serieImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        } else {
+            serieImage = serie.show.image.medium;
+        };
+
+        if (isFav(serie)) {
+            htmlCode += `<li class="serie-card fav serie-card-js" id="${serie.show.id}">`;
+        } else {
+            htmlCode += `<li class="serie-card normal serie-card-js" id="${serie.show.id}">`;
+        }
+        htmlCode += `<img class="img" src="${serieImage}" class="serie-img">`;
+        htmlCode += `<p class="serie-name">${serie.show.name}</p>`;
+        htmlCode += ` </li>`;
     }
+    const seriesContainer = document.querySelector('.container-js');
 
     seriesContainer.innerHTML = htmlCode;
+
+    const serieItems = document.querySelectorAll('.serie-card-js');
+    for (const serieItem of serieItems) {
+        serieItem.addEventListener('click', handleSerie);
+
+    }
 }
-renderSeries();
+
+function isFav(serie) {
+    const favFound = favs.find((fav) => {
+        return fav.show.id === serie.show.id;
+    });
+    if (favFound === undefined) {
+        return false
+    } else {
+        return true
+    };
+}
+
+
+//Listen series
+function handleSerie(ev) {
+    const clickedSerieId = ev.currentTarget.id;
+    const favsFound = favs.find((fav) => {
+        return fav.show.id === parseInt(clickedSerieId);
+    });
+    if (favsFound === undefined) {
+        const serieFound = series.find((serie) => {
+            return serie.show.id === parseInt(clickedSerieId);
+        });
+
+        //Push (cojo la paleta)
+        favs.push(serieFound);
+        renderSeries();
+    } else {
+        const favsFoundIndex = favs.findIndex((fav) => {
+            return fav.show.id === parseInt(clickedSerieId);
+        });
+        favs.splice(favsFoundIndex, 1);
+    }
+    setFavs();
+};
 
 
 
 //Local Storage
-/* 
-function setFavSeries(){
- const stringFavSeries = JSON.stringify(favSeries);
- localStorage.setItem('favSeries', stringFavSeries);
-}*/
-
-
-
-//Start Api
-getDataFromApi();
+function setFavs() {
+    const stringyFavs = JSON.stringify(favs);
+    localStorage.setItem('favs', stringyFavs);
+};
