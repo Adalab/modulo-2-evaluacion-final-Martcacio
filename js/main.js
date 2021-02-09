@@ -145,15 +145,6 @@ const seriesFavContainer = document.querySelector('.container-fav-js');
 
 seriesFavContainer.innerHTML = htmlCode;
 
-//Listen favs
-//ESCUCHAR EVENTOS FAVORITAS
-function listenMovieEvents() {
-    const movieElements = document.querySelectorAll(".js-item");
-    for (const movieElement of movieElements) {
-        movieElement.addEventListener("click", handleMovie);
-    }
-}
-
 
 //Local Storage
 function setFavs() {
@@ -161,4 +152,17 @@ function setFavs() {
     localStorage.setItem('favs', stringyFavs);
 };
 
-renderFavSeries();
+
+function getFavs() {
+    const searchValue = localStorage.getItem('searchvalue');
+    if (searchValue === null) {
+        getDataFromApi('favs');
+        inputElement.value = 'favs';
+    } else {
+        getDataFromApi(searchValue);
+        inputElement.value = searchValue;
+    }
+};
+
+
+getFavs();
