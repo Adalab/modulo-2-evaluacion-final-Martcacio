@@ -7,30 +7,28 @@
     background-color: rgb(231, 208, 157);
 }
 
-.title {
-    height: 70px;
-    color: #fdf1d6;
+.header {
     background-color: #3f0f0c;
+}
+
+.title {
+    height: 50px;
+    color: #fdf1d6;
     padding-top: 20px;
     font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     text-align: center;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-areas: 'aside main';
-}
-
 .form {
-    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
 }
 
 .search-input {
     margin-left: 20px;
     border: none;
-    border-bottom: 1px solid #3f0f0c;
     cursor: pointer;
 }
 
@@ -42,15 +40,23 @@
     color: #ffffff;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-areas: 'aside main';
+}
+
 .series-fav-title {
-    margin-top: 40px;
-    margin-left: 20px;
+    padding-top: 40px;
+    padding-left: 20px;
     font-family: 'Roboto Mono', monospace;
     color: #91091e;
+    text-align: center;
 }
 
 .series-fav-container-all {
     grid-area: aside;
+    border-right: 2px solid #3f0f0c;
 }
 
 .series-fav {
@@ -74,6 +80,8 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .serie-card {
@@ -89,8 +97,11 @@
 }
 
 .seriefav-card {
+    margin-top: 10px;
     list-style: none;
+    padding-top: 10px;
     padding-bottom: 10px;
+    width: 170px;
 }
 
 .serie-name {
