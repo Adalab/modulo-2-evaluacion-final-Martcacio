@@ -107,18 +107,18 @@ function handleSerie(ev) {
 function renderFavSeries() {
     let htmlCode = '';
 
-    for (const serieFav of seriesFav) {
+    for (const fav of favs) {
 
-        let serieFavImage = '';
-        if (serieFav.show.image === null) {
-            serieFavImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        let favImage = '';
+        if (fav.show.image === null) {
+            favImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
         } else {
-            serieFavImage = serieFav.show.image.medium;
+            favImage = fav.show.image.medium;
         };
 
-        htmlCode += `<li class="seriefav-card normal seriefav-card-js" id="${serieFav.show.id}">`;
-        htmlCode += `<img class="img" src="${serieFavImage}" class="serie-img">`;
-        htmlCode += `<p class="serie-name">${serieFav.show.name}</p>`;
+        htmlCode += `<li class="seriefav-card normal seriefav-card-js" id="${fav.show.id}">`;
+        htmlCode += `<img class="img" src="${favImage}" class="serie-img">`;
+        htmlCode += `<p class="serie-name">${fav.show.name}</p>`;
         htmlCode += ` </li>`;
     }
     const seriesFavContainer = document.querySelector('.container-fav-js');
@@ -135,15 +135,13 @@ function setFavs() {
 
 
 function getFavs() {
-    const searchValue = localStorage.getItem('searchvalue');
-    if (searchValue === null) {
-        getDataFromApi('girls');
-        inputElement.value = '';
-    } else {
-        getDataFromApi(searchValue);
-        inputElement.value = searchValue;
+    const favsStorage = localStorage.getItem('favs');
+    if (favsStorage !== null) {
+        favs = JSON.parse(favsStorage);
+        renderFavSeries();
     }
 };
 
 
 getFavs();
+getDataFromApi('girls');
