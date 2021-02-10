@@ -116,8 +116,8 @@ function renderFavSeries() {
             favImage = fav.show.image.medium;
         };
 
-        htmlCode += `<li class="seriefav-card normal seriefav-card-js" id="${fav.show.id}">`;
-        htmlCode += `<img class="img" src="${favImage}" class="serie-img">`;
+        htmlCode += `<li class="seriefav-card fav seriefav-card-js" id="${fav.show.id}">`;
+        htmlCode += `<img class="img-fav" src="${favImage}" class="serie-img">`;
         htmlCode += `<p class="serie-name">${fav.show.name}</p>`;
         htmlCode += ` </li>`;
     }

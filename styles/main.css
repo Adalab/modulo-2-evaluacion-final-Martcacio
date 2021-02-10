@@ -49,9 +49,8 @@
     color: #91091e;
 }
 
-.series-fav-container {
+.series-fav-container-all {
     grid-area: aside;
-    border-right: 1px solid #3f0f0c;
 }
 
 .series-fav {
@@ -68,6 +67,13 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+}
+
+.series-container-fav {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .serie-card {
@@ -89,6 +95,12 @@
 
 .serie-name {
     font-family: 'Roboto Mono', monospace;
+}
+
+.img-fav {
+    height: 200px;
+    width: 150px;
+    margin-bottom: 10px;
 }
 
 .img {
