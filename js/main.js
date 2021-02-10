@@ -59,7 +59,6 @@ function renderSeries() {
     const serieItems = document.querySelectorAll('.serie-card-js');
     for (const serieItem of serieItems) {
         serieItem.addEventListener('click', handleSerie);
-
     }
     setFavs();
 }
@@ -99,28 +98,10 @@ function handleSerie(ev) {
     }
     setFavs();
     renderSeries();
+    renderFavSeries();
 };
 
 
-//Array favs
-function handleFavorite(ev) {
-    const serieClickedId = parseInt(ev.currentTarget.id);
-    console.log(serieClickedId);
-
-    const indexFav = favorites.findIndex((serie) => {
-        return serie.id === serieClickedId;
-    });
-    if (indexFav !== -1) {
-        favs.splice(indexFav, 1);
-    } else {
-        for (let i = 0; i < serie.length; i++) {
-            if (serieClickedId === serie[i].id) {
-                favs.push(serie[i]);
-            }
-        }
-    }
-    renderFavSeries();
-}
 
 //Mis favs 
 function renderFavSeries() {
@@ -140,10 +121,10 @@ function renderFavSeries() {
         htmlCode += `<p class="serie-name">${serieFav.show.name}</p>`;
         htmlCode += ` </li>`;
     }
-}
-const seriesFavContainer = document.querySelector('.container-fav-js');
+    const seriesFavContainer = document.querySelector('.container-fav-js');
 
-seriesFavContainer.innerHTML = htmlCode;
+    seriesFavContainer.innerHTML = htmlCode;
+}
 
 
 //Local Storage
@@ -156,8 +137,8 @@ function setFavs() {
 function getFavs() {
     const searchValue = localStorage.getItem('searchvalue');
     if (searchValue === null) {
-        getDataFromApi('favs');
-        inputElement.value = 'favs';
+        getDataFromApi('girls');
+        inputElement.value = '';
     } else {
         getDataFromApi(searchValue);
         inputElement.value = searchValue;
