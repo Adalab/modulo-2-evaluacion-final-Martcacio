@@ -8,7 +8,8 @@
 }
 
 .header {
-    background-color: #3f0f0c;
+    background-image: url("../images/desert.png")
+    /* background-color: #3f0f0c;*/
 }
 
 .title {
@@ -36,7 +37,7 @@
     width: 80px;
     height: 30px;
     border: none;
-    background-color: #c39e5c;
+    background-color: #f6c279;
     color: #ffffff;
 }
 
@@ -50,13 +51,13 @@
     padding-top: 40px;
     padding-left: 20px;
     font-family: 'Roboto Mono', monospace;
-    color: #91091e;
+    color: #8c2514;
     text-align: center;
 }
 
 .series-fav-container-all {
     grid-area: aside;
-    border-right: 2px solid #3f0f0c;
+    border-right: 2px solid #c07c55;
 }
 
 .series-fav {
@@ -121,11 +122,11 @@
 }
 
 .normal {
-    background-color: #da723c;
-    color: #91091e;
+    background-color: #f68b47;
+    color: #8c2514;
 }
 
 .fav {
-    color: #da723c;
-    background-color: #91091e;
+    color: #f68b47;
+    background-color: #8c2514;
 }
