@@ -35,7 +35,6 @@ function renderSeries() {
     let htmlCode = '';
 
     for (const serie of series) {
-
         let serieImage = '';
         if (serie.show.image === null) {
             serieImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
@@ -50,6 +49,7 @@ function renderSeries() {
         }
         htmlCode += `<img class="img" src="${serieImage}" class="serie-img">`;
         htmlCode += `<p class="serie-name">${serie.show.name}</p>`;
+        htmlCode += `<p class="serie-status">${serie.show.status}</p>`
         htmlCode += ` </li>`;
     }
     const seriesContainer = document.querySelector('.container-js');
@@ -115,11 +115,12 @@ function renderFavSeries() {
         } else {
             favImage = fav.show.image.medium;
         };
-
         htmlCode += `<li class="seriefav-card fav seriefav-card-js" id="${fav.show.id}">`;
         htmlCode += `<img class="img-fav" src="${favImage}" class="serie-img">`;
         htmlCode += `<p class="serie-name">${fav.show.name}</p>`;
+        htmlCode += `<button class="button-cross cross-js"><i class="fas fa-backspace"></i></button>`
         htmlCode += ` </li>`;
+
     }
     const seriesFavContainer = document.querySelector('.container-fav-js');
 
@@ -127,12 +128,52 @@ function renderFavSeries() {
 }
 
 
+//Delete all
+function deleteAll() {
+    const deleteAll = document.querySelector('.delete-js');
+    deleteAll.addEventListener('click', handleDelete());
+}
+
+
+
+function handleDelete() {
+    localStorage.removeItem('favs');
+    renderSeries();
+    renderFavSeries();
+}
+
+
+
+
+
+//Remove x
+function removeCrossButton() {
+    const removeCrosess = document.querySelectorAll('.cross-js');
+    localStorage.removeItem('favs');
+    for (const removeCross of removeCrosses) {
+        removeCross.addEventListener('click', handleRemoveCross());
+    }
+
+}
+
+function handleRemoveCross(ev) {
+    const clickedRemoveId = parseInt(ev.currentTarget.id)
+    const deleteIndex = fav.findIndex((fav) => fav.show.id === clickedRemoveId);
+    if (deleteIndex !== undefined) {
+        favs.splice(favsFoundIndex, 1);
+        renderFavSeries();
+        renderSeries();
+    }
+}
+
+
+
+
 //Local Storage
 function setFavs() {
     const stringyFavs = JSON.stringify(favs);
     localStorage.setItem('favs', stringyFavs);
 };
-
 
 function getFavs() {
     const favsStorage = localStorage.getItem('favs');
@@ -145,3 +186,15 @@ function getFavs() {
 
 getFavs();
 getDataFromApi('girls');
+
+
+//Log
+const logFavs = document.querySelector('.log-js');
+
+function handleLogFavs() {
+    for (const fav of favs) {
+        console.log(fav.show.name);
+    }
+}
+
+logFavs.addEventListener('click', handleLogFavs);

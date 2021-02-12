@@ -34,7 +34,7 @@
 }
 
 .search-button {
-    width: 80px;
+    width: 70px;
     height: 30px;
     border: none;
     background-color: #f6c279;
@@ -74,6 +74,37 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+}
+
+.container-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.button-delete {
+    color: #fdf1d6;
+    border: none;
+    height: 25px;
+    width: 150px;
+    background-color: #f6c279;
+    margin-left: 10px;
+}
+
+.button-log {
+    color: #fdf1d6;
+    border: none;
+    height: 25px;
+    width: 50px;
+    background-color: #f6c279;
+}
+
+.button-cross {
+    border: none;
+    color: #8c2514;
+    background-color: transparent;
+    position: relative;
+    left: 100px;
+    bottom: 127px;
 }
 
 .series-container-fav {
