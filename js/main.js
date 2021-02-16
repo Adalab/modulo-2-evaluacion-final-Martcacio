@@ -118,28 +118,33 @@ function renderFavSeries() {
         htmlCode += `<li class="seriefav-card fav seriefav-card-js" id="${fav.show.id}">`;
         htmlCode += `<img class="img-fav" src="${favImage}" class="serie-img">`;
         htmlCode += `<p class="serie-name">${fav.show.name}</p>`;
-        htmlCode += `<button class="button-cross cross-js"><i class="fas fa-backspace"></i></button>`
+        htmlCode += `<button class="button-cross cross-js" id="${fav.show.id}"><i class="fas fa-backspace"></i></button>`
         htmlCode += ` </li>`;
 
     }
     const seriesFavContainer = document.querySelector('.container-fav-js');
 
     seriesFavContainer.innerHTML = htmlCode;
+    removeCrossButton();
+
 }
 
 
 //Delete all
 function deleteAll() {
-    const deleteAll = document.querySelector('.delete-js');
-    deleteAll.addEventListener('click', handleDelete());
-}
 
+    const deleteAll = document.querySelector('.delete-js');
+    deleteAll.addEventListener('click', handleDelete);
+}
+deleteAll();
 
 
 function handleDelete() {
     localStorage.removeItem('favs');
+    favs = [];
     renderSeries();
     renderFavSeries();
+
 }
 
 
@@ -148,22 +153,26 @@ function handleDelete() {
 
 //Remove x
 function removeCrossButton() {
-    const removeCrosess = document.querySelectorAll('.cross-js');
+    const removeCrosses = document.querySelectorAll('.cross-js');
     localStorage.removeItem('favs');
     for (const removeCross of removeCrosses) {
-        removeCross.addEventListener('click', handleRemoveCross());
+        removeCross.addEventListener('click', handleRemoveCross);
     }
 
 }
 
+
+
 function handleRemoveCross(ev) {
+
     const clickedRemoveId = parseInt(ev.currentTarget.id)
-    const deleteIndex = fav.findIndex((fav) => fav.show.id === clickedRemoveId);
-    if (deleteIndex !== undefined) {
-        favs.splice(favsFoundIndex, 1);
+    const deleteIndex = favs.findIndex((fav) => fav.show.id === clickedRemoveId);
+    if (deleteIndex !== -1) {
+        favs.splice(deleteIndex, 1);
         renderFavSeries();
         renderSeries();
     }
+
 }
 
 
