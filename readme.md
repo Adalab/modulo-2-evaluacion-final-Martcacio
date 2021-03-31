@@ -1,16 +1,10 @@
-![Adalab](https://beta.adalab.es/resources/images/adalab-logo-155x61-bg-white.png)
+## HOLA! 
 
-# Evaluación final
+Web de búsqueda de series creada con JavasCript en la que el usuario introduce el título o parte del título que desee en el input de texto y al pulsar en el botón "Buscar" recibe de la Api las opciones posibles. Cada serie tiene un título y una foto y si esa serie no tiene imagen se pondrá una predeterminada.
 
-**Búsqueda de series** 
-Este es el ejercicio final del módulo 2, un buscador de series en el que podremos seleccionar y deseleccionar nuestras favoritas.
+En cuanto al apartado de favoritos al pulsar la serie que quieres se muestra en el lado izquierdo de la pantalla y gracias a los botones podemos quitar de favortios tanto de una vez todos (Botón general) como de uno en uno. 
+
+También hay que decir que aún refrescando la página estos datos de favoritos se seguirán reflejando gracias al trabajo con el **local Storage**
 
 
-## Autora
-Soy Marta y os dejo el enlace a mi linkedin por si queréis echarle un vistazo
-
-- [Marta Cano](https://www.linkedin.com/in/martacacio/)
-
-### Agradecimientos
-Agradezco a los profes que me han ayudado cuando estaba trabada, siempre con una sonrisa.
-`@@Muchas gracias!`
+Marta Cano Palacio
